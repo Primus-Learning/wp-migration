@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 899775f (updating tf code)
 
 # VPC
 resource "aws_vpc" "wordpress_vpc" {
@@ -72,10 +75,14 @@ resource "aws_instance" "wordpress_instance" {
   security_groups        = [aws_security_group.wordpress_sg.id]
   associate_public_ip_address = true
 
+<<<<<<< HEAD
 
   # user_data = file("userdata.sh")
 
 
+=======
+  user_data = file("userdata.sh")
+>>>>>>> 899775f (updating tf code)
 
   tags = {
     Name = "bloomscoach-dev"
