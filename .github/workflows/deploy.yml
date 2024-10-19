@@ -31,5 +31,5 @@ jobs:
             --instance-ids "i-004aee8ed40389322" \
             --document-name "AWS-RunShellScript" \
             --comment "GitHub Actions EC2 deployment" \
-            --parameters commands='cd /var/www/html && git pull origin main && sudo systemctl restart httpd' \
+            --parameters commands='cd /var/www/html && git pull origin Dev && sudo systemctl restart httpd' \
             --output text
