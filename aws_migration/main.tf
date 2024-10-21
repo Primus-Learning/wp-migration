@@ -1,4 +1,5 @@
 
+
 # VPC
 resource "aws_vpc" "wordpress_vpc" {
   cidr_block           = "10.0.0.0/16"
@@ -72,6 +73,7 @@ resource "aws_instance" "wordpress_instance" {
   associate_public_ip_address = true
 
   # user_data = file("userdata.sh")
+
 
   tags = {
     Name = "bloomscoach-instance"
