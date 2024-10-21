@@ -76,6 +76,7 @@ resource "aws_instance" "wordpress_instance" {
   associate_public_ip_address = true
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   # user_data = file("userdata.sh")
 
@@ -83,6 +84,9 @@ resource "aws_instance" "wordpress_instance" {
 =======
   user_data = file("userdata.sh")
 >>>>>>> 899775f (updating tf code)
+=======
+  # user_data = file("userdata.sh")
+>>>>>>> 40180b5 (update ami with wp gold image)
 
   tags = {
     Name = "bloomscoach-dev"
