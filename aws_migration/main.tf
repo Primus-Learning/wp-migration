@@ -72,7 +72,9 @@ resource "aws_instance" "wordpress_instance" {
   security_groups        = [aws_security_group.wordpress_sg.id]
   associate_public_ip_address = true
 
+
   # user_data = file("userdata.sh")
+
 
 
   tags = {
