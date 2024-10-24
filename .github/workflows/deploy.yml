@@ -3,7 +3,7 @@ name: Deploy to EC2 using AWS CLI
 on:
   push:
     branches:
-      - ci/cd
+      - main
 
 jobs:
   deploy:
@@ -31,5 +31,5 @@ jobs:
             --instance-ids "i-034d8cc8050ca7632" \
             --document-name "AWS-RunShellScript" \
             --comment "GitHub Actions EC2 deployment" \
-            --parameters commands='cd /var/www/html && git pull origin ci/cd && sudo systemctl restart httpd' \
+            --parameters commands='cd /var/www/html && git pull origin main && sudo systemctl restart httpd' \
             --output text
