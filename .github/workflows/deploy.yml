@@ -3,7 +3,7 @@ name: Deploy to EC2 using AWS CLI
 on:
   push:
     branches:
-      - Dev
+      - ci/cd
 
 jobs:
   deploy:
@@ -20,16 +20,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+      #- name: Install AWS CLI
+        #run: |
+          #sudo apt-get update
+          #sudo apt-get install -y awscli
 
       - name: Deploy to EC2 via SSM
         run: |
           aws ssm send-command \
-            --instance-ids "i-004aee8ed40389322" \
+            --instance-ids "i-034d8cc8050ca7632" \
             --document-name "AWS-RunShellScript" \
             --comment "GitHub Actions EC2 deployment" \
-            --parameters commands='cd /var/www/html && git pull origin Dev && sudo systemctl restart httpd' \
+            --parameters commands='cd /var/www/html && git pull origin ci/cd && sudo systemctl restart httpd' \
             --output text
