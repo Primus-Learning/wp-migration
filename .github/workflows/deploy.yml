@@ -28,7 +28,7 @@ jobs:
       - name: Deploy to EC2 via SSM
         run: |
           aws ssm send-command \
-            --instance-ids "i-0cea66cc2554cafaf" \
+            --instance-ids "i-034d8cc8050ca7632" \
             --document-name "AWS-RunShellScript" \
             --comment "GitHub Actions EC2 deployment" \
             --parameters commands='cd /var/www/html && git pull origin ci/cd && sudo systemctl restart httpd' \
