@@ -12,6 +12,7 @@ jobs:
 
     env:
       AWS_REGION: us-east-1  # Set your preferred AWS region
+      AWS_PROFILE: wp-migration  # Set the profile name for Terraform to use
 
     steps:
       # Step 1: Checkout the code
