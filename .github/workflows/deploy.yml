@@ -1,35 +1,49 @@
-name: Deploy to EC2 using AWS CLI
+name: Deploy EC2 Instances with Terraform
 
 on:
   push:
     branches:
-      - Dev
+      - ci/cd  # Runs the workflow on push to the ci/cd branch. Adjust branch as needed.
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
-  deploy:
+  terraform:
     runs-on: ubuntu-latest
 
+    env:
+      AWS_REGION: us-east-1  # Set your preferred AWS region
+      #AWS_PROFILE: wp-migration  # Set the profile name for Terraform to use
+
     steps:
-      - name: Checkout code
+      # Step 1: Checkout the code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Step 2: Set up Terraform CLI
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.9.8  # Replace with the version you use
+
+      # Step 3: Configure AWS credentials
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: ${{ env.AWS_REGION }}
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+      # Step 4: Terraform Init
+      - name: Terraform Init
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
+        run: terraform init
 
-      - name: Deploy to EC2 via SSM
-        run: |
-          aws ssm send-command \
-            --instance-ids "i-004aee8ed40389322" \
-            --document-name "AWS-RunShellScript" \
-            --comment "GitHub Actions EC2 deployment" \
-            --parameters commands='cd /var/www/html && git pull origin Dev && sudo systemctl restart httpd' \
-            --output text
+      # Step 5: Terraform Plan (optional, but recommended)
+      - name: Terraform Plan
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
+        run: terraform plan
+
+      # Step 6: Terraform Apply (auto-approve for automation)
+      - name: Terraform Apply
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
+        run: terraform apply -auto-approve

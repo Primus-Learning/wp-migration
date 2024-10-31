@@ -78,6 +78,6 @@ resource "aws_instance" "wordpress_instance" {
 
 
   tags = {
-    Name = "bloomscoach-instance"
+    Name = "bloomscoach-dev"
   }
 }
