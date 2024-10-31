@@ -34,12 +34,15 @@ jobs:
 
       # Step 4: Terraform Init
       - name: Terraform Init
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
         run: terraform init
 
       # Step 5: Terraform Plan (optional, but recommended)
       - name: Terraform Plan
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
         run: terraform plan
 
       # Step 6: Terraform Apply (auto-approve for automation)
       - name: Terraform Apply
+        working-directory: ./aws_migration  # Adjust to your Terraform directory
         run: terraform apply -auto-approve
