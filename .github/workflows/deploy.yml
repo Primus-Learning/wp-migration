@@ -3,7 +3,7 @@ name: Deploy EC2 Instances with Terraform
 on:
   push:
     branches:
-      - main  # Runs the workflow on push to the main branch. Adjust branch as needed.
+      - ci/cd  # Runs the workflow on push to the ci/cd branch. Adjust branch as needed.
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
