@@ -1,6 +1,6 @@
 #!/bin/bash
 #yum update -y
-yum install -y httpd mysql php7.4 php-mysql
+#yum install -y httpd mysql php7.4 php-mysql
 systemctl start httpd
 systemctl enable httpd
 cd /var/www/html
